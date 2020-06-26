@@ -6,32 +6,53 @@ typedef struct node {
     struct node *next;
 } node;
 
-typedef enum bool {FALSE, TRUE} bool;
+typedef node *List;
+typedef enum bool {FALSE, TRUE} Bool;
 
-bool is_empty(node *head);
-void print_list(node *head);
-node *search_item(node *head, int item);
-bool push_front(node **hptr, int item);
-bool push_back(node **hptr, int item);
-int pop_front(node **hptr);
-int pop_back(node **hptr);
-bool delete_item(node **hptr, int item);
+Bool is_empty(List head);
+void print_list(List head);
+node *search_item(List head, int item);
+Bool push_front(List *hptr, int item);
+Bool push_back(List *hptr, int item);
+int pop_front(List *hptr);
+int pop_back(List *hptr);
+Bool delete_item(List *hptr, int item);
 
-node *head = NULL;
+/* Uncomment and rewrite main if you want to use it.
+int main()
+{
+    List a=NULL;
+    printf("%d", is_empty(a));
+    print_list(a);
+    printf("%p", search_item(a, 3));
+    push_front(&a, 1);
+    push_front(&a, 2);
+    push_back(&a, 2);
+    push_back(&a, 1);
+    print_list(a);
+    pop_back(&a);
+    pop_front(&a);
+    print_list(a);
+    delete_item(&a, 1);
+    delete_item(&a, 2);
+    print_list(a);
+    printf("%d", pop_front(&a));
+}
+*/
 
-/* is_empty: checks if the list is empty*/
-bool is_empty(node *head)
+/* is_empty: checks if the List is empty*/
+Bool is_empty(List head)
 {
     return head == NULL;
 }
 
-/* print_list: prints all the items of the list */
-void print_list(node *head)
+/* print_List: prints all the items of the List */
+void print_list(List head)
 {
     node *temp = head;
 
     if (is_empty(head)) {
-        printf("Empty list");
+        printf("Empty List");
     }
 
     while (temp != NULL) {
@@ -42,8 +63,8 @@ void print_list(node *head)
 }
 
 /* search_item: returns the pointer to the node
-                if the given item is in the list */
-node *search_item(node *head, int item)
+                if the given item is in the List */
+node *search_item(List head, int item)
 {
     node *temp = head;
 
@@ -53,8 +74,8 @@ node *search_item(node *head, int item)
     return temp;
 }
 
-/* push_front: inserts the given item in front of the list */
-bool push_front(node **hptr, int item)
+/* push_front: inserts the given item in front of the List */
+Bool push_front(List *hptr, int item)
 {
     node *temp;
 
@@ -69,8 +90,8 @@ bool push_front(node **hptr, int item)
     return 1;
 }
 
-/* push_back: inserts the given item in the end of list */
-bool push_back(node **hptr, int item)
+/* push_back: inserts the given item in the end of List */
+Bool push_back(List *hptr, int item)
 {
     node *new_node, *temp;
 
@@ -80,7 +101,7 @@ bool push_back(node **hptr, int item)
     new_node -> data = item;
     new_node -> next = NULL;
 
-    if (is_empty(*hptr))    // empty list
+    if (is_empty(*hptr))    // empty List
         *hptr = new_node;
     else {
         temp = *hptr;
@@ -93,11 +114,11 @@ bool push_back(node **hptr, int item)
 }
 
 /* pop_front: pops the first element and returns its data */
-int pop_front(node **hptr)
+int pop_front(List *hptr)
 {
     if (is_empty(*hptr)) {
-        printf("Empty list\n");
-        return -1;
+        printf("Empty List\n");
+        return 0;
     }
 
     else {
@@ -112,21 +133,23 @@ int pop_front(node **hptr)
 }
 
 /* pop_back: pops the last element and returns its data */
-int pop_back(node **hptr)
+int pop_back(List *hptr)
 {
     node *prev, *temp = *hptr;
     int data;
 
     if (is_empty(*hptr)) {
-        printf("Empty list\n");
-        return -1;
+        printf("Empty List\n");
+        return 0;
     }
+
     else if ((*hptr)->next == NULL) {
         data = temp->data;
         *hptr = NULL;
         free(temp);
         return data;
     }
+
     else {
         while (temp->next != NULL) {
             prev = temp;
@@ -141,7 +164,7 @@ int pop_back(node **hptr)
 
 /* delete_item: deletes the first node
                 with data equal to the given item */ 
-bool delete_item(node **hptr, int item)
+Bool delete_item(List *hptr, int item)
 {
     node *temp, *prev;
     temp = *hptr;
@@ -158,10 +181,10 @@ bool delete_item(node **hptr, int item)
         temp = temp -> next;
     }
 
-    /* data not found */
+    /* item not found */
     if (temp == NULL)
         return 0;
-    /* data found */
+    /* item found */
     else {
         prev -> next = temp -> next;
         free(temp);
