@@ -1,3 +1,4 @@
+/* Please initialize every new list to NULL */
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -6,7 +7,8 @@ typedef struct node {
     struct node *next;
 } node;
 
-typedef node *List;
+
+typedef node *List; // Please initialize every new List to NULL
 typedef enum bool {FALSE, TRUE} Bool;
 
 Bool is_empty(List head);
@@ -18,27 +20,34 @@ int pop_front(List *hptr);
 int pop_back(List *hptr);
 Bool delete_item(List *hptr, int item);
 
-/* Uncomment and rewrite main if you want to use it.
+/* The main function was used by me to test the functions
+   and has no other purpose.
+   Uncomment and rewrite main() if you are working directly inside this file.
+
 int main()
 {
-    List a=NULL;
-    printf("%d", is_empty(a));
-    print_list(a);
-    printf("%p", search_item(a, 3));
-    push_front(&a, 1);
-    push_front(&a, 2);
-    push_back(&a, 2);
-    push_back(&a, 1);
-    print_list(a);
-    pop_back(&a);
-    pop_front(&a);
-    print_list(a);
-    delete_item(&a, 1);
-    delete_item(&a, 2);
-    print_list(a);
-    printf("%d", pop_front(&a));
+
+    List ls=NULL;
+    printf("%d", is_empty(ls));
+    print_list(ls);
+    printf("%p", search_item(ls, 3));
+    push_front(&ls, 1);
+    push_front(&ls, 2);
+    push_back(&ls, 2);
+    push_back(&ls, 1);
+    print_list(ls);
+    pop_back(&ls);
+    pop_front(&ls);
+    print_list(ls);
+    delete_item(&ls, 1);
+    delete_item(&ls, 2);
+    print_list(ls);
+    printf("%d", pop_front(&ls));
+
+    return 0;
 }
 */
+
 
 /* is_empty: checks if the List is empty*/
 Bool is_empty(List head)
