@@ -7,7 +7,6 @@ typedef struct node {
     struct node *next;
 } node;
 
-
 typedef node *List; // Please initialize every new List to NULL
 typedef enum bool {FALSE, TRUE} Bool;
 
