@@ -165,7 +165,7 @@ void heap_sort(Element *arr, int size)
 }
 
 
-/* test: testing function used to test the above functions 
+/* test: testing function I used to test the above functions 
 void test(void)
 {
     Heap heap = Heap();
