@@ -1,4 +1,5 @@
-/* Binary Search Tree implemented using linked list */
+/* Binary Search Tree implemented using linked list
+ * Initialize each new tree using Nodeptr root = NULL */
 #include <stdio.h>
 #include <stdlib.h>
 
